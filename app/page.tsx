@@ -289,6 +289,22 @@ export default function SakekringLanding() {
       {/* HERO                                                          */}
       {/* ============================================================ */}
       <section className="relative bg-sk-navy overflow-hidden min-h-screen flex items-center pt-20">
+        {/* Hero background image */}
+        <div className="absolute inset-0">
+          <img
+            src="/images/hero-desktop.jpg"
+            alt=""
+            className="hidden md:block w-full h-full object-cover object-center"
+            loading="eager"
+          />
+          <img
+            src="/images/hero-mobile.jpg"
+            alt=""
+            className="block md:hidden w-full h-full object-cover object-top"
+            loading="eager"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-sk-navy/90 via-sk-navy/75 to-sk-navy/40" />
+        </div>
         <div className="absolute inset-0 opacity-60" style={{ background: 'radial-gradient(ellipse 80% 60% at 70% 30%, rgba(45,106,79,0.15) 0%, transparent 70%)' }} />
         <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.3) 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
         <div className="relative z-10 max-w-7xl mx-auto px-8 sm:px-6 py-24 md:py-32 w-full">
@@ -430,14 +446,19 @@ export default function SakekringLanding() {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 fade-up">
             {[
-              { title: 'Geen Facebook-Drama', desc: "Geen algoritme. Geen onsigbare plasings. Net 'n privaat ruimte vir sakemense wat regtig wil bou." },
-              { title: 'Volkseie Netwerk', desc: '230+ Afrikaanse sakemense op een platform. Eenmansake tot gevestigde ondernemings. Almal hier om te help.' },
-              { title: 'Inhoud, Georganiseer', desc: '1 400+ videos netjies in kursusse en kalenders ingedeel. Geen soek nie.' },
-              { title: 'Werklike Verhoudings', desc: 'Een goeie verbinding kan jou besigheid verander. Sakekring maak dit moontlik.' },
-            ].map(({ title, desc }) => (
-              <div key={title} className="bg-sk-cream-warm rounded-2xl p-7 border-l-4 border-sk-green transition-all duration-300 hover:-translate-y-1" style={{ boxShadow: '0 2px 12px rgba(10,22,40,0.06)' }}>
-                <h4 className="font-display font-bold text-base text-sk-navy mb-2">{title}</h4>
-                <p className="font-body text-sk-stone text-sm leading-relaxed">{desc}</p>
+              { title: 'Geen Facebook-Drama', desc: "Geen algoritme. Geen onsigbare plasings. Net 'n privaat ruimte vir sakemense wat regtig wil bou.", img: '/images/hoekom-facebook-drama.jpg', alt: 'Frustrasie met sosiale media' },
+              { title: 'Volkseie Netwerk', desc: '230+ Afrikaanse sakemense op een platform. Eenmansake tot gevestigde ondernemings. Almal hier om te help.', img: '/images/hoekom-volkseie-netwerk.jpg', alt: 'Privaat sakenetwerk vergadering' },
+              { title: 'Inhoud, Georganiseer', desc: '1 400+ videos netjies in kursusse en kalenders ingedeel. Geen soek nie.', img: '/images/hoekom-inhoud-georganiseer.jpg', alt: 'Georganiseerde besigheidsinhoud' },
+              { title: 'Werklike Verhoudings', desc: 'Een goeie verbinding kan jou besigheid verander. Sakekring maak dit moontlik.', img: '/images/hoekom-werklike-verbindings.jpg', alt: 'Sakemense skud hande by netwerkgeleentheid' },
+            ].map(({ title, desc, img, alt }) => (
+              <div key={title} className="rounded-2xl border border-sk-border-light bg-white overflow-hidden shadow-sm transition-all duration-300 hover:-translate-y-1">
+                <div className="h-48 sm:h-40 overflow-hidden">
+                  <img src={img} alt={alt} className="w-full h-full object-cover" loading="lazy" />
+                </div>
+                <div className="p-6">
+                  <h4 className="font-display font-bold text-base text-sk-navy mb-2">{title}</h4>
+                  <p className="font-body text-sk-stone text-sm leading-relaxed">{desc}</p>
+                </div>
               </div>
             ))}
           </div>
@@ -475,47 +496,82 @@ export default function SakekringLanding() {
               </div>
             </div>
             {/* Courses mockup */}
-            <div className="bg-white/[0.03] border border-white/[0.06] rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1">
-              <div className="px-5 py-3 border-b border-white/[0.06] flex items-center gap-2">
-                <div className="w-2.5 h-2.5 rounded-full bg-sk-gold/60" />
-                <span className="font-body text-white/40 text-xs font-medium ml-1">Kursusse en Lives</span>
-              </div>
-              <div className="p-5 space-y-3">
-                {[
-                  { title: 'Inleiding tot Meta Advertensies', sub: '3 lesse', color: 'green' },
-                  { title: 'Boekhou Vir Eienaars', sub: '5 lesse', color: 'gold' },
-                  { title: 'Hoe Om Jou Besigheid Te Verkoop', sub: 'Live', color: 'green' },
-                ].map(({ title, sub, color }) => (
-                  <div key={title} className="rounded-xl p-4 flex items-center gap-3" style={{ background: color === 'green' ? 'linear-gradient(135deg, rgba(45,106,79,0.1), rgba(45,106,79,0.03))' : 'linear-gradient(135deg, rgba(201,169,97,0.08), rgba(201,169,97,0.02))' }}>
-                    <div className={`w-10 h-10 rounded-lg ${color === 'green' ? 'bg-sk-green/15' : 'bg-sk-gold/10'} flex items-center justify-center flex-shrink-0`}>
-                      <svg className={`w-5 h-5 ${color === 'green' ? 'text-sk-green-light' : 'text-sk-gold'}`} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3" /></svg>
+            <div className="relative bg-white/[0.03] border border-white/[0.06] rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1">
+              <img src="/images/binne-kursusse.jpg" alt="" className="absolute inset-0 w-full h-full object-cover opacity-15" loading="lazy" />
+              <div className="relative z-10">
+                <div className="px-5 py-3 border-b border-white/[0.06] flex items-center gap-2">
+                  <div className="w-2.5 h-2.5 rounded-full bg-sk-gold/60" />
+                  <span className="font-body text-white/40 text-xs font-medium ml-1">Kursusse en Lives</span>
+                </div>
+                <div className="p-5 space-y-3">
+                  {[
+                    { title: 'Inleiding tot Meta Advertensies', sub: '3 lesse', color: 'green' },
+                    { title: 'Boekhou Vir Eienaars', sub: '5 lesse', color: 'gold' },
+                    { title: 'Hoe Om Jou Besigheid Te Verkoop', sub: 'Live', color: 'green' },
+                  ].map(({ title, sub, color }) => (
+                    <div key={title} className="rounded-xl p-4 flex items-center gap-3" style={{ background: color === 'green' ? 'linear-gradient(135deg, rgba(45,106,79,0.1), rgba(45,106,79,0.03))' : 'linear-gradient(135deg, rgba(201,169,97,0.08), rgba(201,169,97,0.02))' }}>
+                      <div className={`w-10 h-10 rounded-lg ${color === 'green' ? 'bg-sk-green/15' : 'bg-sk-gold/10'} flex items-center justify-center flex-shrink-0`}>
+                        <svg className={`w-5 h-5 ${color === 'green' ? 'text-sk-green-light' : 'text-sk-gold'}`} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3" /></svg>
+                      </div>
+                      <div>
+                        <div className="text-white font-body text-sm font-semibold">{title}</div>
+                        <div className="font-body text-white/30 text-xs">{sub}</div>
+                      </div>
                     </div>
-                    <div>
-                      <div className="text-white font-body text-sm font-semibold">{title}</div>
-                      <div className="font-body text-white/30 text-xs">{sub}</div>
-                    </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
             {/* Calendar mockup */}
-            <div className="bg-white/[0.03] border border-white/[0.06] rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1">
-              <div className="px-5 py-3 border-b border-white/[0.06] flex items-center gap-2">
-                <div className="w-2.5 h-2.5 rounded-full bg-sk-green/60" />
-                <span className="font-body text-white/40 text-xs font-medium ml-1">Kalender en Gebeure</span>
+            <div className="relative bg-white/[0.03] border border-white/[0.06] rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1">
+              <img src="/images/binne-kalender.jpg" alt="" className="absolute inset-0 w-full h-full object-cover opacity-15" loading="lazy" />
+              <div className="relative z-10">
+                <div className="px-5 py-3 border-b border-white/[0.06] flex items-center gap-2">
+                  <div className="w-2.5 h-2.5 rounded-full bg-sk-green/60" />
+                  <span className="font-body text-white/40 text-xs font-medium ml-1">Kalender en Gebeure</span>
+                </div>
+                <div className="p-5 space-y-3">
+                  {[
+                    { date: '15 April', title: 'Maandelikse Lede-Q&A', sub: 'Regstreekse uitsaai', color: 'green' },
+                    { date: '22 April', title: 'Live: Belasting vir Sakemense', sub: 'Netwerkgeleentheid', color: 'gold' },
+                    { date: '5 Mei', title: 'Privaat Strategiesessie', sub: 'Strategiesessie', color: 'green' },
+                  ].map(({ date, title, sub, color }) => (
+                    <div key={date} className="rounded-xl p-4" style={{ background: color === 'green' ? 'linear-gradient(135deg, rgba(45,106,79,0.1), rgba(45,106,79,0.03))' : 'linear-gradient(135deg, rgba(201,169,97,0.08), rgba(201,169,97,0.02))' }}>
+                      <div className={`${color === 'green' ? 'text-sk-green-light' : 'text-sk-gold'} font-body text-xs font-bold uppercase tracking-wide mb-1`}>{date}</div>
+                      <div className="text-white font-body text-sm font-semibold">{title}</div>
+                      <div className="font-body text-white/30 text-xs mt-1">{sub}</div>
+                    </div>
+                  ))}
+                </div>
               </div>
-              <div className="p-5 space-y-3">
-                {[
-                  { date: '15 April', title: 'Maandelikse Lede-Q&A', sub: 'Regstreekse uitsaai', color: 'green' },
-                  { date: '22 April', title: 'Live: Belasting vir Sakemense', sub: 'Netwerkgeleentheid', color: 'gold' },
-                  { date: '5 Mei', title: 'Privaat Strategiesessie', sub: 'Strategiesessie', color: 'green' },
-                ].map(({ date, title, sub, color }) => (
-                  <div key={date} className="rounded-xl p-4" style={{ background: color === 'green' ? 'linear-gradient(135deg, rgba(45,106,79,0.1), rgba(45,106,79,0.03))' : 'linear-gradient(135deg, rgba(201,169,97,0.08), rgba(201,169,97,0.02))' }}>
-                    <div className={`${color === 'green' ? 'text-sk-green-light' : 'text-sk-gold'} font-body text-xs font-bold uppercase tracking-wide mb-1`}>{date}</div>
-                    <div className="text-white font-body text-sm font-semibold">{title}</div>
-                    <div className="font-body text-white/30 text-xs mt-1">{sub}</div>
-                  </div>
-                ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* TESTIMONIALS                                                   */}
+      {/* ============================================================ */}
+      <section className="bg-sk-cream-warm py-24 md:py-16 sm:py-12">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <span className="font-body font-bold text-sm uppercase tracking-[0.1em] text-sk-green">Ons Lede</span>
+            <h2 className="font-display font-extrabold text-sk-navy text-4xl md:text-5xl leading-tight tracking-tight mt-4 mb-3">Sakemense Soos Jy</h2>
+            <p className="font-body text-sk-navy/50 text-lg max-w-lg mx-auto leading-relaxed">Van plaaseienaars tot jong entrepreneurs — Sakekring bring Afrikaanse besighede bymekaar.</p>
+          </div>
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div className="bg-white rounded-2xl overflow-hidden shadow-sm border border-sk-border-light">
+              <img src="/images/testimonial-farmer.jpg" alt="Sakekring lid — ervare sakeman" className="w-full h-72 object-cover object-top" loading="lazy" />
+              <div className="p-8">
+                <p className="font-body text-sk-navy/70 text-lg italic leading-relaxed">&ldquo;Sakekring het my gehelp om die regte mense te ontmoet wat my besigheid verstaan. Dis nie nog &apos;n Facebook-groep nie — dis &apos;n werklike netwerk.&rdquo;</p>
+                <p className="font-body font-bold text-sk-navy mt-4">— Sakekring Lid, Vrystaat</p>
+              </div>
+            </div>
+            <div className="bg-white rounded-2xl overflow-hidden shadow-sm border border-sk-border-light">
+              <img src="/images/testimonial-entrepreneur.jpg" alt="Sakekring lid — jong entrepreneur" className="w-full h-72 object-cover object-top" loading="lazy" />
+              <div className="p-8">
+                <p className="font-body text-sk-navy/70 text-lg italic leading-relaxed">&ldquo;Die kursusse en netwerk is presies wat ek as jong entrepreneur nodig gehad het. Ek het binne twee weke my eerste kliënt via Sakekring gekry.&rdquo;</p>
+                <p className="font-body font-bold text-sk-navy mt-4">— Sakekring Lid, Kaapstad</p>
               </div>
             </div>
           </div>
@@ -540,8 +596,12 @@ export default function SakekringLanding() {
       {/* ============================================================ */}
       {/* PRICING                                                       */}
       {/* ============================================================ */}
-      <section id="pryse" className="bg-sk-cream py-24 md:py-20 sm:py-12">
-        <div className="max-w-7xl mx-auto px-8 sm:px-6">
+      <section id="pryse" className="relative overflow-hidden py-24 md:py-20 sm:py-12">
+        <div className="absolute inset-0">
+          <img src="/images/pricing-aerial-farm.jpg" alt="" className="w-full h-full object-cover" loading="lazy" />
+          <div className="absolute inset-0 bg-sk-cream/[0.92]" />
+        </div>
+        <div className="relative z-10 max-w-7xl mx-auto px-8 sm:px-6">
           {/* Founding member banner */}
           <div ref={foundingRef} className="max-w-4xl mx-auto mb-8 p-5 px-8 rounded-xl border border-sk-gold flex flex-col md:flex-row md:items-center gap-6 fade-up" style={{ background: 'linear-gradient(135deg, #F4EBD0 0%, #EDE6D3 100%)' }}>
             <div className="flex-shrink-0">
@@ -654,37 +714,49 @@ export default function SakekringLanding() {
       {/* ABOUT BOERMEDIA                                               */}
       {/* ============================================================ */}
       <section className="bg-sk-navy py-24 md:py-16 sm:py-12">
-        <div className="max-w-7xl mx-auto px-8 sm:px-6 grid lg:grid-cols-[55%_45%] gap-16 items-center fade-up">
-          <div>
-            <div className="w-24 h-24 rounded-2xl flex items-center justify-center mb-8" style={{ background: 'linear-gradient(135deg, #1B4332, #2D6A4F)', boxShadow: '0 8px 24px rgba(27,67,50,0.3)' }}>
-              <span className="text-sk-gold font-display font-extrabold text-3xl tracking-tight">BM</span>
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-12 items-center fade-up">
+            {/* Image column */}
+            <div className="rounded-2xl overflow-hidden shadow-lg order-2 md:order-1">
+              <img
+                src="/images/about-boermedia-studio.jpg"
+                alt="Boermedia se professionele inhoudstudio"
+                className="w-full h-auto object-cover"
+                loading="lazy"
+              />
             </div>
-            <h2 className="font-display font-extrabold text-white text-4xl md:text-5xl leading-tight tracking-tight mb-6">Boermedia se Amptelike Sakekring</h2>
-            <p className="font-body text-white/70 text-base leading-relaxed mb-4">Sakekring is Boermedia se privaat gemeenskap vir Afrikaanse sakemense. Dieselfde inhoud, lives en netwerk wat jy ken, nou in &apos;n skoon, privaat Skool-omgewing sonder Facebook se geraas.</p>
-            <p className="font-body text-white/50 text-base leading-relaxed mb-8">Boermedia bou sedert 2019 aan Suid-Afrika se grootste volkseie digitale mediahuis. Sakekring is die volgende stap, &apos;n plek waar ons gemeenskap werklik kan saamwerk, leer en groei.</p>
-            <div className="flex gap-4">
-              <a href="https://www.facebook.com/boermedia" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-white/5 border border-white/10 text-white font-body text-sm font-medium px-5 py-3 rounded-xl hover:bg-white/10 transition-colors">
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073c0 6.025 4.388 11.025 10.125 11.927v-8.437H7.078v-3.49h3.047V9.41c0-3.018 1.793-4.685 4.533-4.685 1.313 0 2.688.235 2.688.235v2.953h-1.513c-1.492 0-1.955.929-1.955 1.882v2.263h3.328l-.532 3.49h-2.796v8.437C19.612 23.098 24 18.098 24 12.073z" /></svg>
-                Volg op Facebook
-              </a>
-              <a href="https://www.youtube.com/@boermedia" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-white/5 border border-white/10 text-white font-body text-sm font-medium px-5 py-3 rounded-xl hover:bg-white/10 transition-colors">
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.546 12 3.546 12 3.546s-7.505 0-9.377.504A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.504 9.376.504 9.376.504s7.505 0 9.377-.504a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" /></svg>
-                Volg op YouTube
-              </a>
-            </div>
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            {[
-              { num: '147K+', label: 'Facebook Volgers' },
-              { num: '27K+', label: 'YouTube Intekenare' },
-              { num: '1 400+', label: "Video's Gepubliseer" },
-              { num: 'Sedert 2019', label: 'Volkseie digitale mediahuis' },
-            ].map(({ num, label }) => (
-              <div key={label} className="rounded-xl p-6" style={{ background: 'linear-gradient(135deg, rgba(45,106,79,0.12), rgba(45,106,79,0.04))' }}>
-                <div className="font-body font-extrabold text-2xl text-white mb-1">{num}</div>
-                <div className="font-body text-sm text-white/60">{label}</div>
+            {/* Text column */}
+            <div className="order-1 md:order-2">
+              <div className="w-24 h-24 rounded-2xl flex items-center justify-center mb-8" style={{ background: 'linear-gradient(135deg, #1B4332, #2D6A4F)', boxShadow: '0 8px 24px rgba(27,67,50,0.3)' }}>
+                <span className="text-sk-gold font-display font-extrabold text-3xl tracking-tight">BM</span>
               </div>
-            ))}
+              <h2 className="font-display font-extrabold text-white text-4xl md:text-5xl leading-tight tracking-tight mb-6">Boermedia se Amptelike Sakekring</h2>
+              <p className="font-body text-white/70 text-base leading-relaxed mb-4">Sakekring is Boermedia se privaat gemeenskap vir Afrikaanse sakemense. Dieselfde inhoud, lives en netwerk wat jy ken, nou in &apos;n skoon, privaat Skool-omgewing sonder Facebook se geraas.</p>
+              <p className="font-body text-white/50 text-base leading-relaxed mb-8">Boermedia bou sedert 2019 aan Suid-Afrika se grootste volkseie digitale mediahuis. Sakekring is die volgende stap, &apos;n plek waar ons gemeenskap werklik kan saamwerk, leer en groei.</p>
+              <div className="flex gap-4 mb-8">
+                <a href="https://www.facebook.com/boermedia" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-white/5 border border-white/10 text-white font-body text-sm font-medium px-5 py-3 rounded-xl hover:bg-white/10 transition-colors">
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073c0 6.025 4.388 11.025 10.125 11.927v-8.437H7.078v-3.49h3.047V9.41c0-3.018 1.793-4.685 4.533-4.685 1.313 0 2.688.235 2.688.235v2.953h-1.513c-1.492 0-1.955.929-1.955 1.882v2.263h3.328l-.532 3.49h-2.796v8.437C19.612 23.098 24 18.098 24 12.073z" /></svg>
+                  Volg op Facebook
+                </a>
+                <a href="https://www.youtube.com/@boermedia" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-white/5 border border-white/10 text-white font-body text-sm font-medium px-5 py-3 rounded-xl hover:bg-white/10 transition-colors">
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.546 12 3.546 12 3.546s-7.505 0-9.377.504A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.504 9.376.504 9.376.504s7.505 0 9.377-.504a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" /></svg>
+                  Volg op YouTube
+                </a>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                {[
+                  { num: '147K+', label: 'Facebook Volgers' },
+                  { num: '27K+', label: 'YouTube Intekenare' },
+                  { num: '1 400+', label: "Video's Gepubliseer" },
+                  { num: 'Sedert 2019', label: 'Volkseie digitale mediahuis' },
+                ].map(({ num, label }) => (
+                  <div key={label} className="rounded-xl p-6" style={{ background: 'linear-gradient(135deg, rgba(45,106,79,0.12), rgba(45,106,79,0.04))' }}>
+                    <div className="font-body font-extrabold text-2xl text-white mb-1">{num}</div>
+                    <div className="font-body text-sm text-white/60">{label}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -754,11 +826,19 @@ export default function SakekringLanding() {
         </div>
       </section>
 
+      {/* Texture divider */}
+      <div className="relative h-3 overflow-hidden">
+        <img src="/images/texture-leather-wood.jpg" alt="" className="w-full h-full object-cover opacity-40" loading="lazy" />
+      </div>
+
       {/* ============================================================ */}
       {/* FINAL CTA                                                     */}
       {/* ============================================================ */}
-      <section className="bg-sk-navy py-24 relative overflow-hidden">
-        <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse 50% 70% at 50% 50%, rgba(45,106,79,0.08) 0%, transparent 70%)' }} />
+      <section className="py-24 relative overflow-hidden">
+        <div className="absolute inset-0">
+          <img src="/images/cta-sunrise-road.jpg" alt="" className="w-full h-full object-cover object-center" loading="lazy" />
+          <div className="absolute inset-0 bg-sk-navy/70" />
+        </div>
         <div className="relative z-10 max-w-[720px] mx-auto px-8 text-center">
           <p className="text-sk-gold font-body text-sm font-semibold mb-6">Stigterslede-Aanbod aktief: {foundingCount} van 100 Sakeleier-plekke gevul</p>
           <h2 className="font-display font-extrabold text-white text-4xl md:text-5xl leading-tight tracking-tight mb-4">Jou Toekoms In Besigheid Begin Met Een Stap</h2>
